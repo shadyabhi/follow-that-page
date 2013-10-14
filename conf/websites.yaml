@@ -1,0 +1,7 @@
+settings:
+  cache_dir: "/home/shadyabhi/.follow-that-page"
+websites:
+- url: http://blog.abhijeetr.com
+  frequency: 10
+- url: http://abhijeetr.com
+  frequency: 10
