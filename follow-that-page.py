@@ -54,7 +54,8 @@ for w in websites_to_monitor:
             f.write(url_current_copy)
 
     if url_current_copy == read_stored_copy(url):
-        # No changes
+        # No changes. Just change mtime to the current time to keep
+        # the track of last time it was checked
         os.utime(url_path_on_filesystem(url), (current_time, current_time))
         pass
     else:
