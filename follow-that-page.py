@@ -59,5 +59,7 @@ for w in websites_to_monitor:
         os.utime(url_path_on_filesystem(url), (current_time, current_time))
         pass
     else:
+        print "URL changed: ", url
         diff = '\n'.join(d.compare(read_stored_copy(url).splitlines(), url_current_copy.splitlines()))
+        print diff
         write_stored_copy(url, url_current_copy)
