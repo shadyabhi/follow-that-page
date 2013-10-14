@@ -4,7 +4,9 @@ The idea of this script is to output the changes in the webpage when the webpage
 
 Example cronjob entry:
 
+```
 */15 * * * * /path/to/follow-that-page.py
+```
 
 The above entry will check for webpage updates every 15 minutes.
 
