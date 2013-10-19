@@ -38,20 +38,20 @@ def write_stored_copy(url, contents):
     path = url_path_on_filesystem(url)
 
     with open(path, "w") as f:
-        f.write(contents)
-        
+        f.write(contents.encode('ascii', 'ignore'))
+
 for w in websites_to_monitor:
     url = w['url']
     frequency = w['frequency']
 
-    url_current_copy = html2text(urllib2.urlopen(url).read())
+    url_current_copy = html2text(urllib2.urlopen(url).read().decode('ascii', 'ignore'))
 
     try:
         if current_time - os.stat(url_path_on_filesystem(url)).st_mtime < frequency: continue
     except OSError:
         # That means that the file doesn't exist.
         with open(url_path_on_filesystem(url), 'w') as f:
-            f.write(url_current_copy)
+            f.write(url_current_copy.decode('ascii', 'ignore'))
 
     if url_current_copy == read_stored_copy(url):
         # No changes. Just change mtime to the current time to keep
