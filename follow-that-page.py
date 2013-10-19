@@ -23,7 +23,7 @@ url_path_on_filesystem = lambda url: os.path.join(cache_dir, hashlib.md5(os.path
 
 def read_stored_copy(url):
     """
-    Read the stored copy of the URL and return it. 
+    Read the stored copy of the URL and return it.
     If it doesn't exist, return None
     """
     path = url_path_on_filesystem(url)
@@ -49,7 +49,7 @@ for w in websites_to_monitor:
     try:
         if current_time - os.stat(url_path_on_filesystem(url)).st_mtime < frequency: continue
     except OSError:
-        # That means that the file doesn't exist. 
+        # That means that the file doesn't exist.
         with open(url_path_on_filesystem(url), 'w') as f:
             f.write(url_current_copy)
 
