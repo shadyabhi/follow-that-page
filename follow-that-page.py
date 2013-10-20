@@ -5,9 +5,13 @@ import time
 import os
 import hashlib
 import difflib
+import sys
 
 # Read config file
 config_file = yaml.load(open("conf/websites.yaml"))
+# Set default encoding to 'UTF-8' instead of 'ascii'
+reload(sys)
+sys.setdefaultencoding("UTF8")
 
 cache_dir = config_file['settings']['cache_dir']
 websites_to_monitor = config_file['websites']
@@ -39,7 +43,7 @@ def write_stored_copy(url, contents):
 
     with open(path, "w") as f:
         f.write(contents)
-        
+
 for w in websites_to_monitor:
     url = w['url']
     frequency = w['frequency']
