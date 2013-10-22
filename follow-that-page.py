@@ -18,7 +18,6 @@ sys.setdefaultencoding("UTF8")
 cache_dir = config_file['settings']['cache_dir']
 websites_to_monitor = config_file['websites']
 current_time = time.time()
-d = difflib.Differ()
 
 # Create required directories
 if not os.path.exists(cache_dir): os.makedirs(cache_dir)
@@ -66,6 +65,6 @@ for w in websites_to_monitor:
         pass
     else:
         print "URL changed: ", url
-        diff = '\n'.join(d.compare(read_stored_copy(url).splitlines(), url_current_copy.splitlines()))
+        diff = '\n'.join(difflib.ndiff(read_stored_copy(url).splitlines(), url_current_copy.splitlines()))
         print diff
         write_stored_copy(url, url_current_copy)
