@@ -6,6 +6,7 @@ import os
 import hashlib
 import difflib
 import sys
+import httplib
 
 # Read config file
 config_file = yaml.load(open("conf/websites.yaml"))
@@ -49,7 +50,11 @@ for w in websites_to_monitor:
     url = w['url']
     frequency = w['frequency']
 
-    url_current_copy = html2text(urllib2.urlopen(url).read())
+    try:
+        url_current_copy = html2text(urllib2.urlopen(url).read())
+    except httplib.BadStatusLine:
+        # It's OK, no issues. I don't care about it as it's not script's fault
+        pass
 
     try:
         if current_time - os.stat(url_path_on_filesystem(url)).st_mtime < frequency: continue
